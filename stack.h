@@ -70,13 +70,13 @@ public:
     {
         return size;
     }
-    void printStack(ostream &stream)
+    void printStack(std::ostream &stream)
     {
         Node *temp = top;
-        stream << | ;
+        stream << "| ";
         while (temp != nullptr)
         {
-            stream << " " << temp->data << ", ";
+            stream << temp->data << ", ";
             temp = temp->next;
         }
         stream << std::endl;
