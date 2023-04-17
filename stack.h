@@ -2,9 +2,10 @@
 #include <sstream>
 #include <ostream>
 using std::stringstream;
-
+// At the beginning I was using basic stack functions push pop peek etc (For 1 stack),
+// but ultimately I changed them to work in conjunction with multiple stacks due to the assignment
 template <typename TYPE>
-class Stack : public Stack<TYPE>
+class LinkedStack : public Stack<TYPE>
 {
 private:
     struct Node
@@ -15,10 +16,12 @@ private:
     };
     Node *top = nullptr;
     int size;
+    int top;
+    int *arr;
 
 public:
-    Stack() : top(nullptr), size(0) {}
-    ~Stack()
+    LinkedStack() : top(nullptr), size(0) {}
+    ~LinkedStack()
     {
         Node *current = top;
         while (current != nullptr)
@@ -28,6 +31,7 @@ public:
             delete temp;
         }
     }
+
     void push(TYPE item)
     {
         Node *temp = new Node(item);
@@ -84,5 +88,13 @@ public:
             stream << std::endl;
         }
         free(temp);
+    }
+    int createStack(int size)
+    {
+        Node *temp = new LinkedStack;
+        temp->size = size;
+        temp->top = -1;
+        stack->arr = new int[size];
+        return temp;
     }
 };
