@@ -1,84 +1,39 @@
+
 #pragma once
-#include <sstream>
 #include <ostream>
-using std::stringstream;
 template <typename TYPE>
-class LinkedStack : public Stack<TYPE>
-{
-private:
-    struct Node
-    {
-        TYPE data;
-        Node *next;
-        Node(TYPE item) : data(item), next(nullptr) {}
-    };
-    Node *top = nullptr;
-    int size;
-
+class Stack {
 public:
-    LinkedStack() : top(nullptr), size(0) {}
-    ~LinkedStack()
-    {
-        Node *current = top;
-        while (current != nullptr)
-        {
-            Node *temp = current;
-            current = current->next;
-            delete temp;
-        }
-    }
-
-    void push(TYPE item)
-    {
-        Node *temp = new Node(item);
-        temp->data = item;
-        temp->next = top;
-        top = temp;
-        size++;
-    }
-    void pop()
-    {
-        Node *temp;
-        if (top == nullptr)
-        {
-            throw std::runtime_error("Stack is empty");
-        }
-        else
-        {
-            temp = top;
-            top = top->next;
-            delete temp;
-            size--;
-        }
-    }
-    bool isEmpty()
-    {
-        return top == nullptr;
-    }
-    TYPE peek()
-    {
-        if (!isEmpty())
-        {
-            return top->data;
-        }
-        else
-        {
-            throw std::runtime_error("Stack is empty");
-        }
-    }
-    int getSize()
-    {
-        return size;
-    }
-    void printStack(std::ostream &stream)
-    {
-        Node *temp = top;
-        stream << "| ";
-        while (temp != nullptr)
-        {
-            stream << temp->data << ", ";
-            temp = temp->next;
-        }
-        stream << std::endl;
-    }
+/**
+* Pushes the item on to the top of the stack.
+* @param item The item to insert into the stack.
+*/
+virtual void push(TYPE item) = 0;
+/**
+* Removes the top item from the stack.
+*/
+virtual void pop() = 0;
+/**
+* Returns the top item stored on the stack.
+* @return item currently at the top of the stack.
+*/
+virtual TYPE peek() = 0;
+/**
+* Returns the number of items currently stored in the stack.
+* @return int total number of items in the stack.
+*/
+virtual int getSize() = 0;
+/**
+* Function to print the contents of the stack. The stack should be printed
+with
+* a | at the bottom, and a comma separated list of each element (all on one
+line).
+* For example, if my stack had the values 5, 4, 3, 2, 1 (with 1 at the top),
+then
+* the output would be:
+* | 5, 4, 3, 2, 1
+*
+* @param stream The stream to write to (This will be used similar to cout)
+*/
+virtual void printStack(std::ostream& stream) = 0;
 };
