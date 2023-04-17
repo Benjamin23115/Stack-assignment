@@ -39,27 +39,31 @@ public:
     void pop()
     {
         Node *temp;
-        if (top == NULL)
+        if (top == nullptr)
         {
-            exit(1);
+            throw std::runtime_error("Stack is empty");
         }
         else
         {
             temp = top;
-            top = top->link;
-            free(temp);
+            top = top->next;
+            delete temp;
+            size--;
         }
     }
     bool isEmpty()
     {
-        return top == NULL;
+        return top == nullptr;
     }
     TYPE peek()
     {
         if (!isEmpty())
         {
             return top->data;
-            else exit(1);
+        }
+        else
+        {
+            throw std::runtime_error("Stack is empty");
         }
     }
     int getSize()
@@ -68,21 +72,13 @@ public:
     }
     void printStack(ostream &stream)
     {
-        Node *temp;
-        if (top == NULL)
+        Node *temp = top;
+        stream << | ;
+        while (temp != nullptr)
         {
-            exit(1);
+            stream << " " << temp->data << ", ";
+            temp = temp->next;
         }
-        else
-        {
-            temp = top;
-            stream << | ;
-            while (temp != NULL)
-            {
-                stream << " " << temp->data << ", ";
-            }
-            stream << std::endl;
-        }
-        free(temp);
+        stream << std::endl;
     }
 };

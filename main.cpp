@@ -11,9 +11,7 @@ int main(int argc, char const *argv[])
     int disks;
     std::cout << "Please enter a stack amount" << endl;
     std::cin >> disks;
-    LinkedStack<int> A;
-    LinkedStack<int> B;
-    LinkedStack<int> C;
+
 
     return 0;
 }
