@@ -13,7 +13,11 @@ void towersOfHanoi(int n, LinkedStack<int>& source, LinkedStack<int>& auxiliary,
         int disk = source.peek();
         source.pop();
         target.push(disk);
+        source.printStack(std::cout);
+        auxiliary.printStack(std::cout);
+        target.printStack(std::cout);
         std::cout << "Move disk " << disk << " from source to target" << std::endl;
+        std::cout << "========================" << std::endl;
 
         // Move the n-1 discs from auxiliary to target peg
         towersOfHanoi(n - 1, auxiliary, source, target);
